@@ -31,7 +31,7 @@ Example:
 import { createCopilotAuthPlugin } from "./github-copilot-standalone/copilot"
 
 export default createCopilotAuthPlugin({
-  async transform(url, headers, body) {
+  async transform(sdk, url, headers, body) {
     if (!url.includes("api.githubcopilot.com") && !url.includes("copilot-api.")) {
       return body
     }
@@ -62,6 +62,7 @@ The `transform` function runs inside the Copilot auth fetch wrapper, after openc
 
 ```ts
 type CopilotRequestTransform = (
+  sdk: PluginInput["client"],
   url: string,
   headers: Record<string, string>,
   body: any,

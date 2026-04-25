@@ -3,6 +3,7 @@ import type { Model } from "@opencode-ai/sdk/v2"
 import { CopilotModels } from "./models"
 
 export type CopilotRequestTransform = (
+  sdk: PluginInput["client"],
   url: string,
   headers: Record<string, string>,
   body: any,
@@ -123,7 +124,7 @@ export function createCopilotAuthPlugin(options: CopilotStandaloneOptions = {}) 
             const originalHeaders = (init?.headers as Record<string, string>) ?? {}
             const parsedBody = typeof init?.body === "string" ? JSON.parse(init.body) : init?.body
             const transformedBody =
-              parsedBody !== undefined && transform ? await transform(url, originalHeaders, parsedBody) : parsedBody
+              parsedBody !== undefined && transform ? await transform(sdk, url, originalHeaders, parsedBody) : parsedBody
             const serializedBody = transformedBody !== undefined ? JSON.stringify(transformedBody) : init?.body
             const { isVision, isAgent } = iife(() => {
               try {
