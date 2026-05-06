@@ -14,7 +14,7 @@ export type CopilotStandaloneOptions = {
 }
 
 // Standalone plugin: inlined from @/installation
-const INSTALLATION_VERSION = "1.14.24"
+const INSTALLATION_VERSION = "1.14.33"
 
 // Standalone plugin: inlined from @/util/iife
 function iife<T>(fn: () => T): T {
